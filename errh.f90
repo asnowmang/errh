@@ -15,7 +15,7 @@ subroutine errh(ierr)
 ! Not sure if case can do logic so fix that beforehand
 ! Also prints initial error message  
   if (ierr .eq. 0) then
-     continue
+     intierr = ierr
   elseif (ierr .lt. 0) then
      intierr = -1
      print 69, "Error: ", ierr
