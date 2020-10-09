@@ -1,7 +1,22 @@
-fc = gfortran
-in = bubblesort.f90 errh.f90
-out = bs
-flags = -Wall -Wextra -O3
+SHELL	= /bin/sh
+FC	= gfortran
+FLAGS	= -Wall -Wextra -Wconversion -O3 -c
+SOURCE	= src/errh.f90
+TARGET	= errh.a
+BINDIR	= /usr/local/lib/errh
 
-all: $(in)
-	$(fc) $(flags) $(in) -o $(out)
+all:
+	$(FC) $(FLAGS) $(SOURCE)
+	ar rcv $(TARGET) *.o
+	ranlib $(TARGET)
+
+install:
+	install -d $(BINDIR)
+	install README.md $(TARGET) $(BINDIR)
+
+clean:
+	-rm -f *.o $(TARGET)
+
+uninstall:
+	-rm -rf $(BINDIR)
+
