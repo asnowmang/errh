@@ -1,5 +1,8 @@
 # errh
 Fortran 90 error handling subroutine
 
-A simple subroutine that takes iostat's value as "ierr" and prints nothing if 0 and the approriate or generic error message along with the error if iostat != 0.
-A simple bubble sort implementation is included as an example.
+A simple subroutine that records iostat as ierr. Merely have an if statement check ierr. If it doesn't equal zero, call errh while passing ierr and ioerrmsg.
+### During reads/writes
+    read(10, *, ierr, ioerrmsg)
+### Calling errh
+    call errh(ierr, ioerrmsg)
