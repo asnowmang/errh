@@ -18,7 +18,7 @@ program bubblesort
   do n = 1, 10
      read(12, *, iostat=ierr, iomsg=ioerrmsg) nums(n)
      
-     if (ierr .lt. 0) then
+     if (ierr .ne. 0) then
         goto 9
      else
         continue
