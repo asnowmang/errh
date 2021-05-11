@@ -2,19 +2,21 @@ program bubblesort
   implicit none
   integer  :: nums(10)
   integer  :: n, t, ierr, sorted
+  character(len=100)  :: ioerrmsg
 
 ! Initialize error subroutine  
   interface
-     subroutine errh(ierr)
+     subroutine errh(ierr, ioerrmsg)
        integer, intent(in)  :: ierr
+       character(len=100), intent(in)  :: ioerrmsg
      end subroutine errh
   end interface
 
 ! Parse input to array
-  open(12, file="nums", status="old", form="formatted", iostat=ierr, err=9)
+  open(12, file="nums", status="old", form="formatted", iostat=ierr, err=9, iomsg=ioerrmsg)
 
   do n = 1, 10
-     read(12, *) nums(n)
+     read(12, *, iostat=ierr, iomsg=ioerrmsg) nums(n)
      
      if (ierr .lt. 0) then
         goto 9
@@ -46,6 +48,6 @@ program bubblesort
 68   format(I3)
   enddo
 
-9 call errh(ierr)
+9 call errh(ierr, ioerrmsg)
 
 end program bubblesort

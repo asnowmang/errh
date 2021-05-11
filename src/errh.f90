@@ -2,14 +2,16 @@
 !! Place in main file before calling subroutine
 
 ! interface
-!    subroutine errh(ierr)
+!    subroutine errh(ierr, ierrmsg)
 !      integer, intent(in)  :: ierr
+!      character(len=*), intent(in)  :: ierrmsg
 !    end subroutine errh
 ! end interface
   
-subroutine errh(ierr)
+subroutine errh(ierr, ierrmsg)
   implicit none
   integer, intent(in)  :: ierr
+  character(len=*), intent(in)  :: ierrmsg
   integer  :: intierr
 
 ! Not sure if case can do logic so fix that beforehand
@@ -47,6 +49,8 @@ subroutine errh(ierr)
   case default
      print 68, "Unknown."
   end select
+
+  print *, ierrmsg
   
 68 format(A8)
 69 format(A7, I3)
